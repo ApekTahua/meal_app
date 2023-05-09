@@ -35,14 +35,16 @@ class CategoryItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(200),
         ),
         //Center the text
-        child: Text(
-            Color.alphaBlend(Colors.white.withOpacity(0.8), color)
-                        .computeLuminance() >
-                    0.1
-                ? title.toUpperCase()
-                : title,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium),
+        child: Center(
+          child: Text(
+              Color.alphaBlend(Colors.white.withOpacity(0.8), color)
+                          .computeLuminance() >
+                      0.1
+                  ? title.toUpperCase()
+                  : title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall),
+        ),
       ),
     );
   }

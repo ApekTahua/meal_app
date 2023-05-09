@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'categories_screen.dart';
 import 'favorite_screen.dart';
+import 'package:sidebarx/sidebarx.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -34,10 +35,45 @@ class TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(
-        _pages[_selectedPageIndex]['title'],
-      )),
-      body: _pages[_selectedPageIndex]['page'],
+        title: Center(
+          child: Text(
+            _pages[_selectedPageIndex]['title'],
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+      body: Row(
+        children: [
+          Container(
+            width: 200, // Adjust the width as desired
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  offset: Offset(0, 0),
+                  blurRadius: 4,
+                ),
+              ],
+              color: Color.fromARGB(255, 255, 255, 255),
+            ),
+            child: SidebarX(
+              controller: SidebarXController(selectedIndex: 0),
+              items: const [
+                SidebarXItem(icon: Icons.home, label: 'Home'),
+                SidebarXItem(icon: Icons.search, label: 'Search'),
+                SidebarXItem(icon: Icons.settings, label: 'Settings'),
+                SidebarXItem(icon: Icons.info, label: 'About'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: _pages[_selectedPageIndex]['page'],
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
         backgroundColor: Theme.of(context).primaryColor,
